@@ -1,17 +1,24 @@
 const Task = require('../models/Task');
 const User = require('../models/User');
+const XP_MAP = {
+  easy: 15,
+  medium: 30,
+  hard: 60,
+};
 
 // CREATE TASK
 exports.createTask = async (req, res) => {
   try {
-    const { title, description, category, xpReward } = req.body;
+    const { title, description, category, difficulty } = req.body;
+
+    const xpReward = XP_MAP[difficulty] || XP_MAP.easy;
 
     const newTask = new Task({
       userId: req.userId,
       title,
       description,
       category,
-      xpReward: xpReward || 10,
+      xpReward,
     });
 
     await newTask.save();

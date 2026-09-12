@@ -97,9 +97,9 @@ function renderTasks(tasks) {
 // Add Task
 addTaskForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const title = document.getElementById('taskTitle').value;
-  const category = document.getElementById('taskCategory').value;
-  const xpReward = document.getElementById('taskXP').value;
+   const title = document.getElementById('taskTitle').value;
+   const category = document.getElementById('taskCategory').value;
+   const difficulty = document.getElementById('taskDifficulty').value;
 
   try {
     const res = await fetch(`${API_BASE}/tasks`, {
@@ -108,7 +108,7 @@ addTaskForm.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ title, category, xpReward: Number(xpReward) }),
+       body: JSON.stringify({ title, category, difficulty }),
     });
 
     const data = await res.json();
@@ -118,7 +118,6 @@ addTaskForm.addEventListener('submit', async (e) => {
     }
 
     addTaskForm.reset();
-    document.getElementById('taskXP').value = 10;
     loadTasks();
   } catch (error) {
     console.error('Failed to add task:', error);
