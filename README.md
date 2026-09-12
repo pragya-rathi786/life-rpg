@@ -14,6 +14,7 @@ Built for **Tech Zephyr 4.0 Hackathon**.
 - **Character Attributes** — Missions are categorized (Intellect / Strength / Discipline) and grow the matching stat
 - **Streak Tracking** — Tracks consecutive days of activity
 - **Currency Rewards** — Earn Credits on leveling up
+- **Credit Shop** — Spend earned Credits on collectible profile titles/badges, tracked in a persistent Inventory
 - **Cyberpunk UI** — Neon glow, glitch-text animations, animated grid background, and a celebratory Level-Up modal
 - **Optimistic, Responsive UI** — Smooth XP bar animations and instant feedback on every action
 
@@ -37,6 +38,7 @@ life-rpg/
 ├── backend/
 │   ├── controllers/
 │   │   ├── authController.js
+│   │   ├── shopController.js
 │   │   └── taskController.js
 │   ├── middleware/
 │   │   └── authMiddleware.js
@@ -45,6 +47,7 @@ life-rpg/
 │   │   └── Task.js
 │   ├── routes/
 │   │   ├── authRoutes.js
+│   │   ├── shopRoutes.js
 │   │   └── taskRoutes.js
 │   ├── .env.example
 │   └── server.js
@@ -108,6 +111,8 @@ Open `frontend/index.html` using the **Live Server** extension in VS Code (or an
 | PUT | `/api/tasks/:id` | Update a mission | Yes |
 | DELETE | `/api/tasks/:id` | Delete a mission | Yes |
 | PATCH | `/api/tasks/:id/complete` | Complete a mission (grants XP) | Yes |
+| GET | `/api/shop/items` | Get all available shop items | Yes |
+| POST | `/api/shop/buy` | Purchase a shop item with Credits | Yes |
 
 ---
 
@@ -116,7 +121,8 @@ Open `frontend/index.html` using the **Live Server** extension in VS Code (or an
 - **Leveling Formula:** XP required for next level = `current level × 100`
 - **Attributes:** Completing a mission increases the attribute tied to its category (Intellect / Strength / Discipline)
 - **Streaks:** Incremented when a mission is completed on consecutive calendar days; resets if a day is missed
-- **Currency:** +20 Credits awarded on every level-up
+- **Currency:** +20 Credits awarded on every level-up, spendable in the Credit Shop for permanent profile titles/badges (stored in Inventory)
+- **Anti-cheat:** XP rewards are server-determined from a fixed Easy/Medium/Hard difficulty map — the client cannot submit an arbitrary XP value
 
 ---
 
@@ -136,7 +142,7 @@ Open `frontend/index.html` using the **Live Server** extension in VS Code (or an
 
 ## 📹 Demo Video
 
-https://drive.google.com/file/d/1W1yqR75htDTAVMTSO8gNX_5NWGPnvibk/view?usp=sharing
+[Watch the demo video](https://drive.google.com/file/d/1W1yqR75htDTAVMTSO8gNX_5NWGPnvibk/view?usp=sharing)
 
 ## 🌐 Live Deployment
 
