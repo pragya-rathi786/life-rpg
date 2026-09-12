@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life RPG // Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <div class="dashboard-container">
+    <!-- Header: Player Stats -->
+    <header class="player-header">
+      <div class="player-info">
+        <h2 id="playerName">PLAYER</h2>
+        <p class="rank-label">RANK <span id="playerLevel">1</span></p>
+      </div>
+
+      <div class="xp-section">
+        <div class="xp-bar-container">
+          <div class="xp-bar-fill" id="xpBarFill"></div>
+        </div>
+        <p class="xp-text"><span id="xpCurrent">0</span> / <span id="xpNeeded">100</span> XP</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-icon">💰</span>
+          <span id="playerCurrency">0</span> CREDITS
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">🔥</span>
+          <span id="playerStreak">0</span> STREAK
+        </div>
+      </div>
+
+      <div class="attributes-row">
+        <div class="attr-badge">🧠 INT: <span id="attrIntellect">0</span></div>
+        <div class="attr-badge">💪 STR: <span id="attrStrength">0</span></div>
+        <div class="attr-badge">🎯 DIS: <span id="attrDiscipline">0</span></div>
+      </div>
+
+      <button id="logoutBtn" class="logout-btn">LOGOUT</button>
+    </header>
+
+    <!-- Add Task Section -->
+    <section class="add-task-section">
+      <h3>+ NEW MISSION</h3>
+      <form id="addTaskForm" class="task-form">
+        <input type="text" id="taskTitle" placeholder="MISSION TITLE" required>
+        <select id="taskCategory" required>
+          <option value="intellect">🧠 INTELLECT</option>
+          <option value="strength">💪 STRENGTH</option>
+          <option value="discipline">🎯 DISCIPLINE</option>
+        </select>
+        <input type="number" id="taskXP" placeholder="XP REWARD" value="10" min="5" max="500" required>
+        <button type="submit" class="neon-btn small">DEPLOY MISSION</button>
+      </form>
+    </section>
+
+    <!-- Task List -->
+    <section class="task-list-section">
+      <h3>ACTIVE MISSIONS</h3>
+      <div id="taskList" class="task-list">
+        <!-- Tasks will be injected here by JS -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Level Up Modal -->
+  <div id="levelUpModal" class="modal hidden">
+    <div class="modal-content">
+      <h1 class="glitch" data-text="LEVEL UP!">LEVEL UP!</h1>
+      <p id="newLevelText">RANK 2 ACHIEVED</p>
+      <button id="closeModal" class="neon-btn">CONTINUE</button>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

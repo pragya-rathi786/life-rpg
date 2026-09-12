@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life RPG // Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="auth-container">
+    <h1 class="glitch" data-text="LIFE RPG">LIFE RPG</h1>
+    <p class="subtitle">// SYSTEM ACCESS REQUIRED</p>
+
+    <div class="tab-switch">
+      <button class="tab-btn active" id="loginTab">LOGIN</button>
+      <button class="tab-btn" id="signupTab">SIGNUP</button>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <input type="email" id="loginEmail" placeholder="EMAIL" required>
+      <input type="password" id="loginPassword" placeholder="PASSWORD" required>
+      <button type="submit" class="neon-btn">ENTER THE GRID</button>
+      <p class="error-msg" id="loginError"></p>
+    </form>
+
+    <form id="signupForm" class="auth-form hidden">
+      <input type="text" id="signupUsername" placeholder="USERNAME" required>
+      <input type="email" id="signupEmail" placeholder="EMAIL" required>
+      <input type="password" id="signupPassword" placeholder="PASSWORD" required>
+      <button type="submit" class="neon-btn">INITIALIZE PLAYER</button>
+      <p class="error-msg" id="signupError"></p>
+    </form>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
