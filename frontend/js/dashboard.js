@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://liferpg-backend-t668.onrender.com/api';
 const token = localStorage.getItem('token');
 let currentUser = JSON.parse(localStorage.getItem('user'));
 

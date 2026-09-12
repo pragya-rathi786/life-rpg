@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api/auth';
+const API_URL = 'https://liferpg-backend-t668.onrender.com/api/auth';
 
 // Tab switching
 const loginTab = document.getElementById('loginTab');
