@@ -185,3 +185,105 @@ closeModal.addEventListener('click', () => {
 // Initial Load
 renderPlayerStats(currentUser);
 loadTasks();
+// SHOP LOGIC
+const shopList = document.getElementById('shopList');
+const inventoryList = document.getElementById('inventoryList');
+
+async function loadShop() {
+  try {
+    const res = await fetch(`${API_BASE}/shop/items`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    renderShop(data.items);
+  } catch (error) {
+    console.error('Failed to load shop:', error);
+  }
+}
+
+function renderShop(items) {
+  shopList.innerHTML = '';
+
+  items.forEach((item) => {
+    const owned = currentUser.inventory?.some((inv) => inv.itemName === item.name);
+    const canAfford = currentUser.currency >= item.cost;
+
+    const div = document.createElement('div');
+    div.className = 'shop-item';
+    div.innerHTML = `
+      <div>
+        <div class="shop-item-info">${item.emoji} ${item.name}</div>
+        <div class="shop-item-cost">${item.cost} CREDITS</div>
+      </div>
+      ${owned
+        ? '<span class="owned-badge">✓ OWNED</span>'
+        : `<button class="buy-btn" data-id="${item.id}" ${!canAfford ? 'disabled' : ''}>BUY</button>`
+      }
+    `;
+    shopList.appendChild(div);
+  });
+
+  document.querySelectorAll('.buy-btn').forEach((btn) => {
+    btn.addEventListener('click', () => buyItem(btn.dataset.id));
+  });
+}
+
+async function buyItem(itemId) {
+  try {
+    const res = await fetch(`${API_BASE}/shop/buy`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ itemId }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+
+    currentUser = data.updatedUser;
+    localStorage.setItem('user', JSON.stringify(currentUser));
+    renderPlayerStats(currentUser);
+    renderShop(SHOP_ITEMS_CACHE);
+    renderInventory();
+  } catch (error) {
+    console.error('Failed to buy item:', error);
+  }
+}
+
+function renderInventory() {
+  inventoryList.innerHTML = '';
+
+  if (!currentUser.inventory || currentUser.inventory.length === 0) {
+    inventoryList.innerHTML = '<p class="empty-state">NO ITEMS OWNED YET.</p>';
+    return;
+  }
+
+  currentUser.inventory.forEach((item) => {
+    const div = document.createElement('div');
+    div.className = 'inventory-item';
+    div.textContent = item.itemName;
+    inventoryList.appendChild(div);
+  });
+}
+
+let SHOP_ITEMS_CACHE = [];
+async function initShop() {
+  try {
+    const res = await fetch(`${API_BASE}/shop/items`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    SHOP_ITEMS_CACHE = data.items;
+    renderShop(SHOP_ITEMS_CACHE);
+    renderInventory();
+  } catch (error) {
+    console.error('Failed to init shop:', error);
+  }
+}
+
+initShop();

@@ -15,7 +15,8 @@ const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 const taskRoutes = require('./routes/taskRoutes');
 app.use('/api/tasks', taskRoutes);
-
+const shopRoutes = require('./routes/shopRoutes');
+app.use('/api/shop', shopRoutes);
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB Connected Successfully'))
   .catch((err) => console.error('❌ MongoDB Connection Error:', err));
