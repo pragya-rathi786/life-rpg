@@ -29,18 +29,22 @@ exports.signup = async (req, res) => {
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
-
-    res.status(201).json({
-      message: 'User created successfully',
-      token,
-      user: {
-        id: newUser._id,
-        username: newUser.username,
-        email: newUser.email,
-        level: newUser.level,
-        xp: newUser.xp,
-      },
-    });
+   res.status(201).json({
+  message: 'User created successfully',
+  token,
+  user: {
+    id: newUser._id,
+    username: newUser.username,
+    email: newUser.email,
+    level: newUser.level,
+    xp: newUser.xp,
+    currency: newUser.currency,
+    attributes: newUser.attributes,
+    streak: newUser.streak,
+    inventory: newUser.inventory,
+  },
+});
+    
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
@@ -69,16 +73,20 @@ exports.login = async (req, res) => {
     });
 
     res.json({
-      message: 'Login successful',
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        level: user.level,
-        xp: user.xp,
-      },
-    });
+  message: 'Login successful',
+  token,
+  user: {
+    id: user._id,
+    username: user.username,
+    email: user.email,
+    level: user.level,
+    xp: user.xp,
+    currency: user.currency,
+    attributes: user.attributes,
+    streak: user.streak,
+    inventory: user.inventory,
+  },
+});
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
