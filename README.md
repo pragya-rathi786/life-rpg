@@ -142,7 +142,7 @@ Open `frontend/index.html` using the **Live Server** extension in VS Code (or an
 
 ## 📹 Demo Video
 
-[Watch the demo video](https://drive.google.com/file/d/1W1yqR75htDTAVMTSO8gNX_5NWGPnvibk/view?usp=sharing)
+[Watch the demo video]https://drive.google.com/file/d/11izEGCiaySPnbkYkGDF0ZRxDVTmSxIrn/view?usp=sharing
 
 ## 🌐 Live Deployment
 
